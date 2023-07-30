@@ -29,6 +29,14 @@ body{
     grid-template-columns: repeat(3, auto);
 }
 
+/* Cor da jogada atual, onde não tem simbolo */
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before,
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before  {
+    background:#ADD8E6 !important;
+}
+
 /* Criando a grade das celulas # */
 .cell{
     width: 100px;
@@ -38,6 +46,12 @@ body{
     justify-content: center;
     align-items: center;
     position: relative;
+}
+
+/* Cursor de clique não permitido na celula com X ou Circulo */
+.cell.x,
+.cell.circle{
+    cursor: not-allowed;
 }
 
 /* Tirando as linhas das bordas das grades # */
@@ -67,7 +81,9 @@ body{
 
 /* X */
 .cell.x::before,
-.cell.x::after{
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after,
+.board.x .cell:not(.x):not(.circle):hover::before {
     content: "";
     height: calc(100px * 0.15);
     width: calc(100px * 0.9);
@@ -75,17 +91,21 @@ body{
     position: absolute;
 }
 
-.cell.x::before{
+.cell.x::before,
+.board.x .cell:not(.x):not(.circle):hover::before {
     transform: rotate(45deg);
 }
 
-.cell.x::after{
+.cell.x::after,
+.board.x .cell:not(.x):not(.circle):hover::after {
     transform: rotate(-45deg);
 }
 
 /* Circle */
 .cell.circle::before,
-.cell.circle::after{
+.cell.circle::after,
+.board.circle .cell:not(.x):not(.circle):hover::after,
+.board.circle .cell:not(.x):not(.circle):hover::before {
     content: "";
     height: calc(100px * 0.9);
     width: calc(100px * 0.9);
@@ -96,6 +116,36 @@ body{
 
 
 /* Mensagem de Vitória */
-.winning-message{
-    display: none;
+.winning-message {
+    display: flex;
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0,0,0,0.8);
+    flex-direction: column;
+}
+
+.winning-message-button {
+    font-size: 2.5rem;
+    background-color:  rgba(65, 185, 131, 1);
+    padding: 10px 15px;
+    cursor: pointer;
+    border-radius: 5px;
+    border: none;
+    margin-top: 16px;
+    color: white;
+}
+
+.winning-message-button:hover {
+    color:rgba(65, 185, 131, 1);
+    background-color: white;
+}
+
+.winning-message-text {
+    color:white;
+    font-size: 5rem;
 }
