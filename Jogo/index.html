@@ -7,7 +7,7 @@
     <title>Jogo da Velha</title>
 </head>
 <body>
-    <div class="board">
+    <div class="board x" data-board>
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
         <div class="cell" data-cell></div>
@@ -19,8 +19,8 @@
         <div class="cell" data-cell></div>
     </div>
     <div class="winning-message" data-winnig-message>
-        <p class="winning-message-text"> X Venceu! </p>
-        <button class="winning-message-button">Reiniciar!</button>
+        <p class="winning-message-text" data-winnig-message-text> X Venceu! </p>
+        <button class="winning-message-button" data-restart-button>Reiniciar!</button>
     </div>
     
     <script src="./scripts.js"></script>
