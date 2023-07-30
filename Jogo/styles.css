@@ -114,10 +114,9 @@ body{
     border-radius: 50%;
 }
 
-
 /* Mensagem de Vitória */
 .winning-message {
-    display: flex;
+    display: none;
     position: fixed;
     top: 0;
     left: 0;
@@ -146,6 +145,6 @@ body{
 }
 
 .winning-message-text {
-    color:white;
+    color:#32CD32;
     font-size: 5rem;
 }
