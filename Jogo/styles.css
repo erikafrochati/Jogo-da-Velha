@@ -148,3 +148,7 @@ body{
     color:#32CD32;
     font-size: 5rem;
 }
+
+.show-winning-message {
+    display: flex;
+}
