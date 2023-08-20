@@ -4,17 +4,5 @@
 ***
 
 <div align="center">
-<img align="middle" height="450" width="550"  src="Jogo-da-velha.gif"><br>
+<img align="middle" height="450" width="550"  src=""><br>
 </div>
-
-***
-## Agradecimentos :clap:
-
-* Primeiramente a Deus. 
-* Se você achar que esse projeto agregou algo para você, por favor deixe uma estrela.
-* Meus sinceros agradecimentos a todos que visitam o projeto e deixa uma estrela como reconhecimento.
-* Foi muito gratificante ir acompanhando o passo a passo, para desenvolver esse Jogo.
-* Agradeço muito ao Felipe Rocha por passar o seu conhecimento e explicar muito bem.
-* Ao canal do Dicas para devs de onde tirei toda a inspiração para dar esse passo inicial nesse projeto.
-
-***
