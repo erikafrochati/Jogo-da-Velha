@@ -1,7 +1,7 @@
 const celulas = document.querySelectorAll(".celula");
 const board = document.querySelector("[data-board]");
 
-let checarturno = true;
+let fimDeJogo = false;
 
 const JOGADOR_X = "X";
 const JOGADOR_O = "O";
@@ -22,13 +22,36 @@ const winningCombinations = [
 
  document.addEventListener("click", (event) => {
     if(event.target.matches(".celula")) {
-        jogar(event.target.id);
+        jogar(event.target.id, JOGADOR_X);
+        setTimeout(() => bot(), 500);
     }
 });
 
-function jogar(id) {
+function bot(){
+    const posicoesDisponiveis = [];
+    for (index in celulas){
+        if(!isNaN(index)){
+            if(
+                !celulas[index].classList.contains("X") &&
+                !celulas[index].classList.contains("O")
+            ){
+                posicoesDisponiveis.push(index);
+            }
+        }
+    }
+
+    const posicaoAleatoria = Math.floor(
+        Math.random() * posicoesDisponiveis.length
+    );
+    
+    if(!fimDeJogo){
+        jogar(posicoesDisponiveis[posicaoAleatoria], JOGADOR_O);
+    }
+}
+
+function jogar(id, turno) {
     const celula = document.getElementById(id);
-    turno = checarturno ? JOGADOR_X : JOGADOR_O;
+    //turno = checarturno ? JOGADOR_X : JOGADOR_O;
     celula.textContent = turno;
     celula.classList.add(turno);
     checarVencedor(turno);
@@ -45,9 +68,7 @@ function checarVencedor(turno){
         encerraJogo(turno);
     } else if (checarEmpate()){
         encerraJogo();
-    } else{
-        checarturno = !checarturno;
-    }
+    } 
 }
 
 function checarEmpate(){
@@ -68,6 +89,7 @@ function checarEmpate(){
 }
 
 function encerraJogo(vencedor = null) {
+    fimDeJogo = true;
     const telaEscura = document.getElementById("tela-escura");
     const h2 = document.createElement("h2");
     const h3 = document.createElement("h3");
