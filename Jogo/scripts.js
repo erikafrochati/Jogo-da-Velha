@@ -1,106 +1,99 @@
-const cellElements = document.querySelectorAll("[data-cell]");
+const celulas = document.querySelectorAll(".celula");
 const board = document.querySelector("[data-board]");
-const winningMessageTextElement = document.querySelector("[data-winnig-message-text]");
-const winningMessage = document.querySelector("[data-winnig-message]");
-const restartButton = document.querySelector("[data-restart-button]");
 
-let isCircleTurn;
+let checarturno = true;
+
+const JOGADOR_X = "X";
+const JOGADOR_O = "O";
+
+let isOTurn;
 
 const winningCombinations = [
-   [0, 1, 2],
-   [3, 4, 5],
-   [6, 7, 8],
-   [0, 3, 6],
-   [1, 4, 7],
-   [2, 5, 8],
-   [0, 4, 8],
-   [2, 4, 6],
-];
+    [0, 1, 2],
+    [3, 4, 5],
+    [6, 7, 8],
+    [0, 3, 6],
+    [1, 4, 7],
+    [2, 5, 8],
+    [0, 4, 8],
+    [2, 4, 6],
+ ];
+ 
 
-const startGame = () => {
-    isCircleTurn = false;
-    for (const cell of cellElements){
-        cell.classList.remove("circle");
-        cell.classList.remove("x");
-        cell.removeEventListener("click", handleClick);
-        cell.addEventListener("click", handleClick, { once: true });
+ document.addEventListener("click", (event) => {
+    if(event.target.matches(".celula")) {
+        jogar(event.target.id);
     }
+});
 
-    setBoardHoverClass();
-    winningMessage.classList.remove('show-winning-message');
-};
-
-const endGame = (isDraw) => {
-    if (isDraw){
-        winningMessageTextElement.innerText = 'Empate!'
-    } else {
-        winningMessageTextElement.innerText = isCircleTurn 
-        ? 'O Venceu!' 
-        : 'X Venceu!';
-    }
-
-    winningMessage.classList.add("show-winning-message");
-};
-
-const checkForWin = (currentPlayer) => {
-    return winningCombinations.some((combination) => {
-        return combination.every((index) => {
-            return cellElements[index].classList.contains(currentPlayer);
-        });
-    });
-};
-
-const checkForDraw = () => {
-    return [ ...cellElements].every(cell => {
-      return cell.classList.contains("x") || cell.classList.contains("circle");  
-    });
-};
-
-const placeMark = (cell, classToAdd) => {
-    cell.classList.add(classToAdd);
-};
-
-const setBoardHoverClass = () => {
-    board.classList.remove('circle');
-    board.classList.remove('x');
-
-    if (isCircleTurn) {
-        board.classList.add("circle");
-    } else {
-        board.classList.add("x");
-    }
-
+function jogar(id) {
+    const celula = document.getElementById(id);
+    turno = checarturno ? JOGADOR_X : JOGADOR_O;
+    celula.textContent = turno;
+    celula.classList.add(turno);
+    checarVencedor(turno);
 }
 
-const swapTurns = () => {
-    isCircleTurn = !isCircleTurn
-    setBoardHoverClass();
-};
+function checarVencedor(turno){
+    const vencedor = winningCombinations.some((comb) =>{
+        return comb.every((index) => {
+            return celulas[index].classList.contains(turno);
+        })
+    });
 
-const handleClick = (e) => {
-    // Colocar a marca (X ou Circulo)
-    const cell = e.target;
-    const classToAdd = isCircleTurn ? "circle" : "x";
-
-    placeMark(cell, classToAdd);
-
-    // Verificar uma vitória
-    const isWin = checkForWin(classToAdd);
-
-    // Verificar um empate
-    const isDraw = checkForDraw();
-
-    if (isWin) {
-        endGame(false);
-    } else if (isDraw) {
-        endGame(true);
+    if (vencedor){
+        encerraJogo(turno);
+    } else if (checarEmpate()){
+        encerraJogo();
     } else{
-        // Mudar o Símbolo
-        swapTurns();
-    };
+        checarturno = !checarturno;
+    }
+}
 
-};
+function checarEmpate(){
+    let x = 0;
+    let o = 0;
 
-startGame();
+    for (index in celulas){
+        if(!isNaN(index)){
+            if(celulas[index].classList.contains(JOGADOR_X)){
+                x++;
+            }
+            if(celulas[index].classList.contains(JOGADOR_O)){
+                o++;
+            }
+        }
+    }
+    return x + o === 9 ? true : false; 
+}
 
-restartButton.addEventListener("click", startGame);
+function encerraJogo(vencedor = null) {
+    const telaEscura = document.getElementById("tela-escura");
+    const h2 = document.createElement("h2");
+    const h3 = document.createElement("h3");
+    let mensagem = null;
+
+    telaEscura.style.display = "block";
+    telaEscura.appendChild(h2);
+    telaEscura.appendChild(h3);
+
+    if (vencedor) {
+        h2.innerHTML = `O player <span>${vencedor}</span> venceu`;
+    } else {
+        h2.innerHTML = "Empatou";
+    }
+
+    let contador = 3;
+    const interval = setInterval(() => {
+        h3.innerHTML = `Reiniciando em ${contador}`;
+        contador--;
+
+        if (contador < 0) {
+            clearInterval(interval);
+        }
+    }, 1000);
+
+    setTimeout(() => location.reload(), 4000);
+}
+
+
