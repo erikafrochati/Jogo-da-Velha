@@ -3,6 +3,3 @@
 
 ***
 
-<div align="center">
-<img align="middle" height="450" width="550"  src=""><br>
-</div>
