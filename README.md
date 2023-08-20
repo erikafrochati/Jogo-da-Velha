@@ -6,7 +6,7 @@ Bem vindo! </br> Click para Jogar
 <a href="https://erikafrochati.github.io/Jogo-da-Velha/Jogo/index.html" target="_blank" rel="noopener noreferrer">Jogo criado com HTML, CSS e JavaScript</a>
 
 <div align="center">
-<img align="middle" alt="erika-Jogo-da-velha" height="800" width="1000" src="Jogo-da-velha.gif"><br>
+<img align="middle" alt="erika-Jogo-da-velha" height="500" width="800" src="Jogo-da-velha.gif"><br>
 </div>
 
 ****
