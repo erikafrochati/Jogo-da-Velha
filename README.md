@@ -2,12 +2,14 @@
  *Jogo do galo ou três linhas é um jogo de passatempo popular.*
 
 ***
-Bem vindo! </br> Click para Jogar
-<a href="https://erikafrochati.github.io/Jogo-da-Velha/Jogo/index.html" target="_blank" rel="noopener noreferrer">Jogo criado com HTML, CSS e JavaScript</a>
+*Bem vindo!* </br> 
+<a  target="_blank" rel="noopener noreferrer">Jogo criado com HTML, CSS e JavaScript</a>
 
-<div align="center">
-<img align="middle" alt="erika-Jogo-da-velha" height="500" width="800" src="Jogo-da-velha.gif"><br>
-</div>
+  # Preview:
+  ## [Jogar Jogo da Velha](https://erikafrochati.github.io/Jogo-da-Velha/Jogo/index.html)
+
+  
+  ![Freeway Game](Jogo-da-velha.gif)
 
 ****
 ## Agradecimentos :clap:
